@@ -16,7 +16,7 @@ services:
       - kibana
       - jaeger
     volumes:
-      - ./app:/app
+      - ./myapp:/app
     command: "dotnet myapp.dll"
   
   elasticsearch:
