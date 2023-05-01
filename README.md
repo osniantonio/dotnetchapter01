@@ -12,7 +12,7 @@ Este é um projeto simples criado com Asp net core 6 e Elasticsearch para demons
    git clone https://github.com/osniantonio/dotnetchapter01.git
    ```
 
-2. Acesse a pasta raíz do projeto onde o arquivo fica o arquivo docker-compose.yaml:
+2. Acesse a pasta raíz do projeto onde fica o arquivo docker-compose.yaml:
 
    ```
    cd dotnetchapter01
@@ -24,7 +24,7 @@ Este é um projeto simples criado com Asp net core 6 e Elasticsearch para demons
    docker-compose up -d --build
    ```
 
-   Obs: Este comando pode levar alguns instantes para finalizar.
+   Obs: Este comando pode levar algun tempo para finalizar.
 
 4. Acesse o Kibana e o Jaeger no navegador para verificar se estão no ar:
 
@@ -67,7 +67,7 @@ Este é um projeto simples criado com Asp net core 6 e Elasticsearch para demons
    docker run -p 8080:80 -e "ASPNETCORE_ENVIRONMENT=Development" myapp:latest
    ```
 
-6. Acesse o projeto no navegador:
+6. Acesse o projeto no navegador para testar:
 
    ```
    http://localhost:8080/Test
