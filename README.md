@@ -1,5 +1,3 @@
-TEstSegue um exemplo de README.md com passos para subir o projeto com Asp net core 6 usando docker-compose e docker:
-
 # Projeto Myapp
 
 Este é um projeto simples criado com Asp net core 6 e Elasticsearch para demonstração.
