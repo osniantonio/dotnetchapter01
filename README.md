@@ -1,6 +1,16 @@
 # Projeto Myapp
 
-Este é um projeto simples criado com Asp net core 6 e Elasticsearch para demonstração.
+Este é um simples projeto de demonstração de observabilidade em uma aplicação Asp net core 6 utilizando o Elasticsearch como ferramenta de armazenamento e análise de logs e métricas. Para isso, foram utilizadas as seguintes ferramentas:
+
+- Serilog: biblioteca de logging utilizada para enviar logs para o Elasticsearch;
+
+- OpenTelemetry: uma plataforma de observabilidade utilizada para gerar e enviar dados de tracing para o Elasticsearch;
+
+- Jaeger: sistema de tracing utilizado em conjunto com o OpenTelemetry para visualizar e analisar traces;
+
+- Docker: uma plataforma de contêineres que permitiu a criação de um ambiente isolado para rodar a aplicação e o Elasticsearch;
+
+- Docker Compose: uma ferramenta que permitiu a definição e execução de múltiplos contêineres de forma integrada, facilitando a configuração do ambiente de desenvolvimento e demonstração.
 
 ## Instruções de uso
 
