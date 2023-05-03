@@ -6,16 +6,23 @@ using Serilog.Sinks.Elasticsearch;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuração do Serilog
-Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
-    {
-        IndexFormat = "myapp-{0:yyyy.MM.dd}"
-    })
-    .CreateLogger();
-builder.Host.UseSerilog();
+ElasticsearchSinkOptions options = new ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
+{
+    IndexFormat = $"{Environment.GetEnvironmentVariable("ELASTIC_CONFIGURATION_INDEX_NAME")}-{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").ToLower()}-{DateTime.UtcNow:yyyy-MM-dd}",
+    AutoRegisterTemplate = true,
+    AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+    EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog,
+    MinimumLogEventLevel = Serilog.Events.LogEventLevel.Information,
+    DetectElasticsearchVersion = true
+};
 
+Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .WriteTo.Elasticsearch(options)
+            .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
+            .CreateLogger();
+builder.Host.UseSerilog();
 
 // Configuração do OpenTelemetry para o Console Exporter
 builder.Services.AddOpenTelemetry()
