@@ -80,7 +80,8 @@ Este é um simples projeto de demonstração de observabilidade em uma aplicaç�
 6. Acesse o projeto no navegador para testar:
 
    ```
-   http://localhost:8080/Test
+   https://localhost:8080/Test/test1
+   https://localhost:8080/Test/test2
    ```
 
 7. Se preciso finalizar o container, execute o comando:

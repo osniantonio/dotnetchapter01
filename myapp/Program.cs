@@ -1,5 +1,6 @@
 using Serilog;
 using OpenTelemetry.Trace;
+using OpenTelemetry.Resources;
 using OpenTelemetry.Exporter;
 using Serilog.Sinks.Elasticsearch;
 
@@ -24,16 +25,19 @@ Log.Logger = new LoggerConfiguration()
             .CreateLogger();
 builder.Host.UseSerilog();
 
-// Configuração do OpenTelemetry para o Console Exporter
-builder.Services.AddOpenTelemetry()
-        .WithTracing(builder => builder
-        .AddAspNetCoreInstrumentation()
-        .AddJaegerExporter()
-        .AddConsoleExporter());
-
 // Configuração do OpenTelemetry com HttpClient
+var serviceName = "MyAppService";
+var serviceVersion = "1.0.0";
+
+builder.Services.AddSingleton(TracerProvider.Default.GetTracer(serviceName));
+
+
 builder.Services.AddOpenTelemetry()
     .WithTracing(builder => builder
+        .AddSource(serviceName)
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName: serviceName, serviceVersion: serviceVersion))
+        .AddConsoleExporter()
+        .AddAspNetCoreInstrumentation()
         .AddJaegerExporter(o =>
         {
             o.Protocol = JaegerExportProtocol.HttpBinaryThrift;
